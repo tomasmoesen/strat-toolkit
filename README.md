@@ -1,4 +1,4 @@
-# Cartel Strategy — marketplace
+# Cartel Strategy: marketplace
 
 De interne Claude-marketplace van het Cartel-strategieteam. Een verzamelplek voor de AI-agents die het
 team gebruikt. De eerste is **Root Analyst**, de research-agent die van een briefing een
@@ -16,14 +16,14 @@ Vier lagen, van groot naar klein:
   hier bijvoorbeeld Root Scout of een Junior Strateeg bij.
 - **Een skill** is één vaardigheid binnen een plugin.
 
-Het voordeel boven een los `.skill`-bestand: **wanneer Tomas een wijziging pusht, krijgt iedereen die
+Het voordeel boven een los `.skill`-bestand: **wanneer een wijziging gepusht wordt, krijgt iedereen die
 de marketplace heeft toegevoegd de nieuwe versie automatisch** bij de volgende refresh. En elke nieuwe
 agent die hier bijkomt, verschijnt vanzelf in de catalogus van je collega's, zonder dat zij opnieuw iets
 moeten toevoegen.
 
 ---
 
-## Voor collega's: installeren (één keer)
+## Installeren (één keer)
 
 1. Open **Claude** → in de linkerbalk **Customize** (in Cowork: eerst het tabblad **Cowork**, dan **Customize**).
 2. Ga naar het tabblad **Plugins**.
@@ -50,7 +50,7 @@ skill dubbel.
 
 ---
 
-## Voor Tomas: een wijziging uitrollen
+## Een wijziging uitrollen
 
 1. Pas de bestanden in `plugins/root-analyst/skills/root-analyst/` aan (SKILL.md, referenties, assets).
 2. Verhoog het versienummer in **twee** bestanden (bv. van `2.0.0` naar `2.1.0`):
