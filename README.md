@@ -1,0 +1,111 @@
+# Cartel Strategy — marketplace
+
+De interne Claude-marketplace van het Cartel-strategieteam. Een verzamelplek voor de AI-agents die het
+team gebruikt. De eerste is **Root Analyst**, de research-agent die van een briefing een
+research-summary en een research-dossier maakt volgens de 4M-methodologie (Maatschappij, Markt, Mens,
+Merk).
+
+## Hoe zit dit in elkaar?
+
+Vier lagen, van groot naar klein:
+
+- **Deze repository** (`cartel-strategy`) is de opslagplek op GitHub.
+- **De marketplace** (`.claude-plugin/marketplace.json`) is de catalogus erin. Eén catalogus, meerdere
+  plugins.
+- **Een plugin** is één bundel die je in Claude installeert. Root Analyst is er nu één van; later komen
+  hier bijvoorbeeld Root Scout of een Junior Strateeg bij.
+- **Een skill** is één vaardigheid binnen een plugin.
+
+Het voordeel boven een los `.skill`-bestand: **wanneer Tomas een wijziging pusht, krijgt iedereen die
+de marketplace heeft toegevoegd de nieuwe versie automatisch** bij de volgende refresh. En elke nieuwe
+agent die hier bijkomt, verschijnt vanzelf in de catalogus van je collega's, zonder dat zij opnieuw iets
+moeten toevoegen.
+
+---
+
+## Voor collega's: installeren (één keer)
+
+1. Open **Claude** → in de linkerbalk **Customize** (in Cowork: eerst het tabblad **Cowork**, dan **Customize**).
+2. Ga naar het tabblad **Plugins**.
+3. Onder **Personal plugins**, klik op **+** → **Add marketplace** → **Add from a repository**.
+4. Plak deze repo:
+
+   ```
+   tomasmoesen/cartel-strategy
+   ```
+
+5. Zodra de marketplace is toegevoegd, klik **Install** bij de plugin **Root Analyst**.
+6. Zet daarna eenmalig de **Notion-connector** aan (Customize → Connectors → Notion) en deel de
+   Research-database, Kennisbank, Templates en Methodologie. Root Analyst leest daaruit de
+   voorbeeldrapporten en schrijft er zijn output naartoe.
+
+Klaar. Typ `/` of klik **+** in een gesprek om Root Analyst te gebruiken. Toekomstige agents uit deze
+marketplace kun je op dezelfde plek installeren zodra ze verschijnen.
+
+### Al een los `.skill`-bestand geïnstalleerd?
+
+Verwijder dat eerst (Customize → Skills → de losse Root Analyst verwijderen). Een handmatig
+geïnstalleerd bestand krijgt geen automatische updates; de marketplace-versie wél. Anders heb je de
+skill dubbel.
+
+---
+
+## Voor Tomas: een wijziging uitrollen
+
+1. Pas de bestanden in `plugins/root-analyst/skills/root-analyst/` aan (SKILL.md, referenties, assets).
+2. Verhoog het versienummer in **twee** bestanden (bv. van `2.0.0` naar `2.1.0`):
+   - `plugins/root-analyst/.claude-plugin/plugin.json`
+   - `.claude-plugin/marketplace.json` (het `version`-veld bij die plugin)
+3. Commit en push naar GitHub:
+
+   ```bash
+   git add -A
+   git commit -m "Root Analyst: <korte omschrijving van de wijziging>"
+   git push
+   ```
+
+4. Collega's krijgen de update bij hun volgende **plugin-refresh** (Customize → Plugins → marketplace →
+   menu → *Update*), of automatisch bij een nieuwe sessie. Zij hoeven niets opnieuw te installeren.
+
+### Een nieuwe agent toevoegen (later)
+
+1. Maak naast `plugins/root-analyst/` een nieuwe map `plugins/<naam>/` met dezelfde structuur
+   (`.claude-plugin/plugin.json` + `skills/<naam>/SKILL.md`).
+2. Voeg een extra entry toe in de `plugins`-lijst van `.claude-plugin/marketplace.json`.
+3. Push. De nieuwe agent verschijnt vanzelf in de catalogus van iedereen die de marketplace heeft.
+
+> **Belangrijk:** deze marketplace is **niet openbaar** in Claude. Alleen wie de repo-link
+> `tomasmoesen/cartel-strategy` toevoegt, ziet de plugins. Zet de GitHub-repo op **privé** als je hem
+> enkel binnen het team wil houden — collega's hebben dan wel een GitHub-account met leesrechten op de
+> repo nodig. Let op: de voorbeeldrapporten en de skill kunnen klantgevoelige data bevatten.
+
+---
+
+## Structuur van deze repo
+
+```
+.
+├── .claude-plugin/
+│   └── marketplace.json         # de marketplace-definitie (lijst met plugins)
+├── plugins/
+│   └── root-analyst/
+│       ├── .claude-plugin/
+│       │   └── plugin.json       # de plugin-definitie
+│       └── skills/
+│           └── root-analyst/     # de eigenlijke skill (SKILL.md, referenties, assets)
+└── README.md
+```
+
+## Eerste keer naar GitHub pushen
+
+Maak de repo `cartel-strategy` eerst aan op github.com (zonder README, zodat de push niet botst).
+Daarna, vanuit de map van deze repo:
+
+```bash
+git init
+git add -A
+git commit -m "Cartel Strategy marketplace — Root Analyst v2"
+git branch -M main
+git remote add origin https://github.com/tomasmoesen/cartel-strategy.git
+git push -u origin main
+```

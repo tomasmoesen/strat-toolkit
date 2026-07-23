@@ -1,0 +1,21 @@
+{
+  "name": "cartel-strategy",
+  "owner": {
+    "name": "Tomas Moesen",
+    "url": "https://github.com/tomasmoesen"
+  },
+  "metadata": {
+    "description": "Interne marketplace van het Cartel-strategieteam. Bevat de Root Analyst research-agent."
+  },
+  "plugins": [
+    {
+      "name": "root-analyst",
+      "source": "./plugins/root-analyst",
+      "description": "De research-agent van Cartel: van briefing naar research-summary en research-dossier, volgens de 4M-methodologie (Maatschappij, Markt, Mens, Merk). Levert bronmateriaal, geen strategie.",
+      "version": "2.0.0",
+      "author": {
+        "name": "Tomas Moesen"
+      }
+    }
+  ]
+}

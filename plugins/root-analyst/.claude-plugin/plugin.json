@@ -1,0 +1,8 @@
+{
+  "name": "root-analyst",
+  "description": "De research-agent van Cartel: van briefing naar research-summary en research-dossier, volgens de 4M-methodologie (Maatschappij, Markt, Mens, Merk). Levert bronmateriaal met klikbare bronnen, geen strategie.",
+  "version": "2.0.0",
+  "author": {
+    "name": "Tomas Moesen"
+  }
+}
